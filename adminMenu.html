@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="C:\Users\GeorgievaK\Code\swagstorefrontend\favicon/favicon-96x96.png"/>
+    <title>swagStore</title>
+</head>
+<body style ="background-color:powderblue;">
+	<style>   
+
+    .priceChange, .colorChange, .brandChange {
+        display: flex;
+	    flex-direction: column;
+        align-items: left;
+        margin-left: 300px;
+    }
+    
+    input{
+        display: block;
+        width: 150px;
+        margin-bottom: 10px;
+    }
+
+    </style>
+    <button id="home" style="background-color: mintcream; cursor: pointer; position: fixed; top: 10px; left: 10px; font-family: verdana;" onclick="location.href = 'C:/Users/GeorgievaK/Code/swagstorefrontend/index.html'">Homepage</button>
+    <h1 id="adminHeader" style="font-family: verdana; margin-left: 300px; margin-top: 60px;"></h1>
+    <div id="contentContainer" style="display: flex; font-family: verdana;">
+        <div id="group1" style="flex:1; position:fixed; width: 800px;">
+            <h4 style="font-family: verdana; margin-top: 60px; margin-left: 300px;">Produktpreis verändern:</h4>
+            <div class="priceChange">
+                <div class="productID">
+                    <label>Produkt ID:</label>
+                    <input/ id = "idInput"; autocomplete = "off" style="width: 150px;">
+                </div>
+                <div class="newPrice">
+                    <label>Neuer Preis:</label>
+                    <input/ id="priceInput"; autocomplete="off" style="width: 150px;">
+                </div>
+                <button id="submit" style="background-color: mintcream; cursor: pointer; width: 150px; font-family: verdana;" type="submit">Absenden</button>
+            </div>
+
+            <h4 style="font-family: verdana; margin-top: 60px; margin-left: 300px;">Produktfarbe verändern:</h4>
+            <div class="colorChange">
+                <div class="ID">
+                    <label>Produkt ID:</label>
+                    <input/ id = "inputForId"; autocomplete = "off" style="width: 150px;">
+                </div>
+                <div class="newcolor">
+                    <label>Neuer Farbe:</label>
+                    <input/ id="colorInput"; autocomplete="off" style="width: 150px;">
+                </div>
+                <button id="submitColor" style="background-color: mintcream; cursor: pointer; width: 150px; font-family: verdana;" type="submit" onclick="submitNewColor(this)">Absenden</button>
+            </div>
+
+            <h4 style="font-family: verdana; margin-top: 60px; margin-left: 300px;">Produkt Brand verändern:</h4>
+            <div class="brandChange">
+                <div class="ID">
+                    <label>Produkt ID:</label>
+                    <input/ id = "inputid"; autocomplete = "off" style="width: 150px;">
+                </div>
+                <div class="newbrand">
+                    <label>Neuer Brand:</label>
+                    <input/ id="brandInput"; autocomplete="off" style="width: 150px;">
+                </div>
+                <button id="submitBrand" style="background-color: mintcream; cursor: pointer; width: 150px; font-family: verdana;" type="submit" onclick="submitNewBrand(this)">Absenden</button>
+            </div>
+        </div>
+
+        <div id="group2" style="flex:1; margin-left: 800px;">
+        <ul id="product-container" style="font-family: verdana; color: darkblue; margin-top: 60px; font-size: 120%;"></ul>
+        </div>
+    </div>
+
+    
+</body>
+
+<script src="adminMenu.js"></script>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="C:\Users\GeorgievaK\Code\swagstorefrontend\favicon/favicon-96x96.png"/>
+    <title>swagStore</title>
+</head>
+<body style ="background-color:powderblue;">
+	<style>
+
+        .headers {
+            display: inline-flex;
+            justify-content: left;
+            gap: 20px;
+            align-items: center;
+            padding: 20px;
+            vertical-align: bottom;
+            align-self: flex-end;
+            margin-left: 300px;
+            padding-top: 50px;
+        }
+
+        .box {
+            display: none;
+            justify-content: center;
+            border: 1px solid black;
+            padding: 20px;
+            background-color: aliceblue;
+            width: 400px;
+            margin: 60px auto;
+            padding: 10px;
+            flex-direction: column;
+        }
+
+        .mainContent {
+            display: flex;
+        }
+
+        h3 {
+            text-align: center;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 3px;
+        }
+
+        p {
+            position: fixed;
+            top: 55px;    
+            right: 320px;  
+            font-size: 20px;
+            font-family: verdana;
+            color: black;
+            z-index: 1000;
+        }
+
+    </style>
+    <button id="home" style="background-color: mintcream; cursor: pointer; position: fixed; top: 10px; left: 10px; font-family: verdana;" onclick="location.href = 'C:/Users/GeorgievaK/Code/swagstorefrontend/index.html'">Homepage</button>
+    <div class="headers" style="clear:both">
+    <h1 id="header" style="font-family:verdana; margin: 0;"></h1>
+    <h1 id="count" style="color: black; font-family: Verdana; margin: 0; min-width: 0; flex-shrink: 2; margin-left: 10px;"></h1>
+    <p id="balance"></p>
+    </div>
+    <div class="mainContent">
+    <ul id="shoppingCartContainer" style="margin-left: 300px; margin-top: 40px;" onload="getDictionary()"></ul>
+    <div class="box">
+        <h3 id="overview" style="font-family: verdana; align-items: center;"></h3>
+        <h4 id="discount" style="font-family: verdana; align-items: flex-start; padding-left: 20px;"></h4>
+        <h4 id="sum" style="font-family: verdana; align-items: flex-start; padding-left: 20px;"></h4>
+        <button id="pay" style="background-color: mintcream; cursor: pointer; font-family: verdana;" onclick='payment(this)'>Bezahlen</button>
+
+    </div>
+    </div>
+
+    
+</body>
+
+<script src="shoppingCart.js"></script>
+<script src="insideShoppingCart.js"></script>
+
+</html>
