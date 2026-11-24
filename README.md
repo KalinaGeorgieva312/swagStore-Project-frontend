@@ -22,10 +22,10 @@ A JavaScript, HTML & CSS web shop frontend, built as a hands-on learning project
 2. **Prerequisite:** the backend must be installed and running - follow the swagStore-Project-backend README (https://github.com/KalinaGeorgieva312/swagStore-Project-backend) and run the API in Visual Studio.
 3. Open the cloned frontend folder and open 'index.html' in a browser (tested in Microsoft Edge).
 4. Log in with the test credentials:
-   - to test user: - Username: Bob
-                   - Password: 123
-   - to test admin: - Username: Admin
-                    - Password: asdf
+   - to test user: Username: Bob
+                   Password: 123
+   - to test admin: Username: Admin
+                    Password: asdf
 
 ## Backend
 
