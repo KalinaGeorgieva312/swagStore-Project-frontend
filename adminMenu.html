@@ -22,8 +22,17 @@
         margin-bottom: 10px;
     }
 
+    .wrapper{
+        text-align: center;
+    }
+
     </style>
     <button id="home" style="background-color: mintcream; cursor: pointer; position: fixed; top: 10px; left: 10px; font-family: verdana;" onclick="location.href = 'C:/Users/GeorgievaK/Code/swagstorefrontend/index.html'">Homepage</button>
+    <div class="wrapper">
+        <button id="changeProduct" style="background-color: mintcream; cursor: pointer; position:absolute; top: 10px; left: 1000px; font-family: verdana;" onclick="changeProduct(this)">Produkt ändern</button>
+        <button id="addProduct" style="background-color: mintcream; cursor: pointer; position: absolute; top: 10px; left: 1140px; font-family: verdana;" onclick="newProduct(this)">Produkt hinzufügen</button>
+        <button id="changeUser" style="background-color: mintcream; cursor: pointer; position: absolute; top: 10px; left: 1305px; font-family: verdana;" onclick="">User ändern</button>
+    </div>
     <h1 id="adminHeader" style="font-family: verdana; margin-left: 300px; margin-top: 60px;"></h1>
     <div id="contentContainer" style="display: flex; font-family: verdana;">
         <div id="group1" style="flex:1; position:fixed; width: 800px;">
@@ -70,6 +79,64 @@
         <div id="group2" style="flex:1; margin-left: 800px;">
         <ul id="product-container" style="font-family: verdana; color: darkblue; margin-top: 60px; font-size: 120%;"></ul>
         </div>
+    </div>
+
+    <div id="addition" class="newProd" style="display: flex; justify-content: center; font-family: verdana;">
+        <div id="group1" style="flex:1; position:absolute; align-items: center; width: 800px; top: 150px; left: 350px">
+            <h4 style="font-family: verdana; margin-top: 60px;">Füllen Sie die Produkteigenschaften aus:</h4>
+            <label>Brand:</label>
+            <input/ id = "newBrand"; autocomplete = "off" style="width: 150px;">
+
+            <label>Preis:</label>
+            <input/ id = "newPrice"; autocomplete = "off" style="width: 150px;">
+
+            <label>Typ:</label>
+            <input/ id = "newType"; autocomplete = "off" style="width: 150px;">
+
+            <label>Farbe:</label>
+            <input/ id = "newColor"; autocomplete = "off" style="width: 150px;">
+            <button id="submitProduct" style="background-color: mintcream; cursor: pointer; font-family: verdana; width: 150px;" type="submit" onclick="sendNewProduct(this)">Absenden</button>
+        </div>
+    </div>
+
+    <div id="switch" class="switchUser" style="display: flex; font-family: verdana; margin-left: 300px; margin-top: 60px; position: fixed;">
+        <div id="group1" style="flex:1; position: absolute; align-items: center;">
+            <h4 style="font-family: verdana; margin-top: 60px;">Username verändern:</h4>
+            <label>Aktueller Username:</label>
+            <input/ id="oldUsername"; autocomplete="off" style="width: 150px">
+
+            <label>Neuer Username:</label>
+            <input/ id="newUsername"; autocomplete="off" style="width: 150px">
+
+            <button id="submitUsername" style="background-color: mintcream; cursor: pointer; width: 150px; font-family: verdana;" type="submit">Absenden</button>
+
+            <!--<h4 style="font-family: verdana; margin-top: 60px;">Admin-Konto(Ja/Nein):</h4>
+            <div class="custom-select" style="width:200px;">
+                <select>
+                    <option value="0">Nein</option>
+                    <option value="1">Ja</option>
+                </select>
+            </div>-->
+
+            <h4 style="font-family: verdana; margin-top: 60px;">Benutzerguthaben hinzufügen:</h4>
+            <label>Username:</label>
+            <input/ id="username"; autocomplete="off" style="width: 150px">
+            <label>Benutzerguthaben:</label>
+            <input/ id="balance"; autocomplete="off" style="width: 150px">
+            <button id="submitBalance" style="background-color: mintcream; cursor: pointer; width: 150px; font-family: verdana;" type="submit">Absenden</button>
+
+            <h4 style="font-family: verdana; margin-top: 60px;">Password verändern:</h4>
+            <label>Username:</label>
+            <input/ id="pwUsername"; autocomplete="off" style="width: 150px">
+
+            <label>Neues Password:</label>
+            <input/ id="newPassword"; autocomplete="off" style="width: 150px">
+
+            <button id="submitPassword" style="background-color: mintcream; cursor: pointer; width: 150px; font-family: verdana;" type="submit">Absenden</button>
+        </div>  
+
+        
+
     </div>
 
     
