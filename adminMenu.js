@@ -1,9 +1,13 @@
 const urlLocalHost = "http://localhost:5118";
 let products = [];
+let users = [];
 
 hidden();
 displayText();
+var divs = ["contentContainer", "addition", "switch", "newUser"];
+var visibleDivId = null;
 loadAllProducts();
+loadAllUsers();
 
 const inputID = document.getElementById('idInput').value;
 const inputPrice = document.getElementById('priceInput').value;
@@ -24,6 +28,7 @@ const idProduct = document.getElementById('inputid');
 numberInputs(idProduct);
 const brandInput = document.getElementById('brandInput')
 stringInputs(brandInput);
+
 const newBrand = document.getElementById('newBrand');
 stringInputs(newBrand);
 const newPrice = document.getElementById('newPrice');
@@ -32,6 +37,22 @@ const newType = document.getElementById('newType');
 stringInputs(newType);
 const newColor = document.getElementById('newColor');
 stringInputs(newColor);
+
+const oldUname = document.getElementById('oldUsername');
+noSpecialChar(oldUname);
+const newUname = document.getElementById('newUsername');
+noSpecialChar(newUname);
+const currentUname = document.getElementById('username');
+noSpecialChar(currentUname);
+const balance = document.getElementById('balance');
+numberInputs(balance);
+const uName = document.getElementById('pwUsername');
+noSpecialChar(uName);
+
+const newUsername = document.getElementById('');
+noSpecialChar(newUsername);
+const newBalance = document.getElementById('');
+numberInputs(newBalance);
 
 function displayText() {
 //const token = localStorage.getItem('token');
@@ -51,6 +72,12 @@ function stringInputs(domElement) {
     domElement.addEventListener('input', function(e) {
         this.value = this.value.replace(/[^a-zA-Z]/g, '');
     });
+}
+
+function noSpecialChar(domElement) {
+    domElement.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')
+    })
 }
 
 async function submitNewPrice(inputId, inputPrice) {
@@ -162,6 +189,9 @@ async function displayBrands() {
 
 async function drawProducts() {
     const div = document.getElementById("product-container");
+    const productId1 = document.getElementById('idInput');
+    const productId2 = document.getElementById('inputForId');
+    const productId3 = document.getElementById('inputid');
 
     let allProducts = [];
     allProducts = await displayBrands();
@@ -174,11 +204,11 @@ async function drawProducts() {
                 //console.log(li.dataset.index);
 				li.textContent = "Index: " + p.index + ", Brand: " + p.brand + ", Price: " + p.priceEuro + "€, Type: " + p.type + ", Color: " + p.color;
                 div.appendChild(li);
-                addProductButtons(li);
+                addButtons(li, productId1, productId2, productId3);
     });
 }
 
-function addProductButtons(parentElement){
+function addButtons(parentElement, id1, id2, id3){
 
 	const addButton = document.createElement("button");
 	const imgs = document.createElement('img');
@@ -196,14 +226,10 @@ function addProductButtons(parentElement){
         addButton.style.marginTop = "10px";
         addButton.style.marginBottom = "10px";
 
-    const productId1 = document.getElementById('idInput');
-    const productId2 = document.getElementById('inputForId');
-    const productId3 = document.getElementById('inputid');
-
 	addButton.addEventListener("click", () => {
-        productId1.value = parentElement.class;
-        productId2.value = parentElement.class;
-        productId3.value = parentElement.class;
+        id1.value = parentElement.class;
+        id2.value = parentElement.class;
+        id3.value = parentElement.class;
 	});
 
 	parentElement.appendChild(addButton);
@@ -217,9 +243,6 @@ function propertyOverwrite(valueID){
     const inputPrice = document.getElementById('priceInput').value;
     const inputColor = document.getElementById('colorInput').value;
     const inputBrand = document.getElementById('brandInput').value;
-    console.log(inputPrice);
-    console.log(inputColor);
-    console.log(inputBrand);
 
     if(inputPrice != "") {
         result = liText.replace(/(Price:)(.+?)(?=€)/, "Price: " + inputPrice);
@@ -252,17 +275,10 @@ function hidden() {
     for(let i = 0; i < newProduct.length; i++){
         newProduct[i].style.display = 'none';
     }
-}
 
-function changeProduct(btn) {
-    const newProduct = document.getElementsByClassName('newProd');
-    for(let i = 0; i < newProduct.length; i++){
-        newProduct[i].style.display = 'none';
-    }
-    
-    const content = document.getElementsByClassName('content');
-    for(let i = 0; i < content.length; i++){
-        content[i].style.display = 'block';
+    const changeUser = document.getElementsByClassName('switchUser');
+    for(let i = 0; i < changeUser.length; i++){
+        changeUser[i].style.display = 'none';
     }
 }
 
@@ -298,5 +314,155 @@ function newProduct(btn){
     const newProduct = document.getElementsByClassName('newProd');
     for(let i = 0; i < newProduct.length; i++){
         newProduct[i].style.display = 'block';
+    }
+}
+
+async function submitNewUsername(btn) {
+    let oldUsername = document.getElementById('oldUsername').value;
+    let newUsername = document.getElementById('newUsername').value;
+
+    const response = await fetch (urlLocalHost + "/api/admin/changeUsername", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({oldUname: oldUsername, newUname: newUsername})
+    });
+
+    if(!response.ok) {
+        console.log("Submission failed.");
+        alert("Ungültige Anfrage, bitte versuchen Sie es nochmal.");
+    } else {
+        console.log("Sent successfully");
+        propertyOverwriteU(oldUsername);
+        alert("Änderung erfolgreich! Der User mit Username " + oldUsername + " hat die neue Username: " + newUsername);
+        oldUsername = document.getElementById('oldUsername').value = "";
+        newUsername = document.getElementById('newUsername').value = "";
+        document.getElementById('username').value = "";
+        document.getElementById('pwUsername').value = "";
+    }
+}
+
+async function addUserBalance(btn){
+    const currentUname = document.getElementById('username').value;
+    let balance = document.getElementById('balance').value;
+
+    const response = await fetch (urlLocalHost + "/api/admin/changeBalance", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({Username: currentUname, Balance: balance})
+    });
+
+    if(!response.ok) {
+        console.log("Submission failed.");
+        alert("Ungültige Anfrage, bitte versuchen Sie es nochmal.");
+    } else {
+        console.log("Sent.");
+        propertyOverwriteU(currentUname);
+        alert("Änderung erfolgreich! Der User mit Username " + currentUname + " hat " + balance + "€ zum Konto hinzugefügt.");
+        balance = document.getElementById('balance').value = "";
+    }
+}
+
+async function sendNewPassword(btn){
+    const username = document.getElementById('pwUsername').value;
+    let password = document.getElementById('newPassword').value;
+
+    const response = await fetch (urlLocalHost + "/api/admin/changePassword", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({Username: username, Password: password})
+    });
+
+    if(!response.ok) {
+        console.log("Submission failed.");
+        alert("Ungültige Anfrage, bitte versuchen Sie es nochmal.");
+    } else {
+        console.log("Sent.");
+        alert("Änderung erfolgreich! Der User mit Username " + username + " hat ein neues password bekommen.");
+        password = document.getElementById('newPassword').value = "";
+    }
+}
+
+async function loadAllUsers(){
+    const url = urlLocalHost + "/api/user/GetUsers"
+	
+	const result = await fetch(url)
+	
+	users = await result.json();
+
+    drawUsers();
+}
+
+function drawUsers(){
+    const ul = document.getElementById('allUsers');
+    const oldUsername = document.getElementById('oldUsername');
+    const currentUname = document.getElementById('username');
+    const username = document.getElementById('pwUsername');
+
+    users.forEach(u => {
+        const li = document.createElement("li");
+        li.dataset.balance = u.balance;
+        //console.log(li.dataset.balance);
+        li.id = u.userName;
+        li.class = u.userName;
+        li.textContent = "Username: " + u.userName + ", Admin: " + u.isAdmin + ", Kontostand: " + u.balance + "€";
+
+        ul.appendChild(li);
+        addButtons(li, oldUsername, currentUname, username);
+    });
+}
+
+function propertyOverwriteU(valueID){
+    const targetLi = document.getElementById(valueID);
+    console.log(targetLi);
+    const liText = targetLi.textContent;
+    let result = "";
+
+    const newUsername = document.getElementById('newUsername').value;
+    const balance = document.getElementById('balance').value;
+
+    if(newUsername != "") {
+        result = liText.replace(/(Username:)(.+?)(?=,)/, "Username: " + newUsername);
+        console.log("Username " + result);
+    }
+
+    else if(balance != ""){
+        result = targetLi.textContent.split('Kontostand:')[0];
+        const currentBalance = parseFloat(targetLi.dataset.balance);
+        const newBalance = parseFloat(balance);
+        result += "Kontostand: "  + (currentBalance + newBalance) + "€";
+        console.log("Kontostand " + result);
+    }
+
+    const btn = targetLi.querySelector('button');
+    targetLi.textContent = result;
+    if (btn) targetLi.appendChild(btn);
+}
+
+function visibility(divId) {
+    if(visibleDivId === divId) {
+        visibleDivId = null;
+    } else {
+        visibleDivId = divId;
+    }
+    hide()
+}
+
+function hide(){
+    var divId, div;
+    for(let i = 0; i < divs.length; i++) {
+        divId = divs[i];
+        div = document.getElementById(divId);
+
+        if(visibleDivId === divId) {
+            div.style.display = "block";
+        } else {
+            div.style.display = "none";
+        }
     }
 }
